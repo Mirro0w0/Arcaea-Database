@@ -1,0 +1,20 @@
+@font-face {
+    font-family: Arcaea;
+    src: url(Exo-Light.ttf);
+}
+
+h1, h2, label, table, div{
+    font-family: 'Arcaea', sans-serif;
+}
+
+
+table, td, th{
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+#byd{color: red;}
+#ftr{color: purple;}
+#prs{color: green;}
+#pst{color: cyan;}

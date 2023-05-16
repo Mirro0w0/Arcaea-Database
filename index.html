@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dec.css">
+    
+</head>
+
+<body>
+
+    
+    <h1>Arcaea Database</h1>
+    <h2>Score Input</h2>
+    <label for="ChartName">Chart Name: </label>
+    <input type="text" id="ChartName"><br><br>
+
+    <label for="ChartConst">Chart Constant: </label>
+    <input type="text" id="ChartConst"><br><br>
+
+    <label for="Score">Score: </label>
+    <input type="text" id="Score">
+    <br><br>
+
+    <div>
+        <label for="Status">Status: </label>
+        <input name="s" type="radio" value="Pure Memory" id="PM"> Pure Memory
+        <input name="s" type="radio" value="Full Recall" id="FR"> Full Recall
+        <input name="s" type="radio" value="Track Complete" id="TC" checked> Track Complete
+        <input name="s" type="radio" value="Track Lost" id="TL"> Track Lost
+        
+    </div><br>
+
+    <div>
+        <label for="Difficulty">Difficulty: </label>       
+        <input name="d" type="radio" value="Beyond" id="byd"> <span id="byd">Beyond</span> 
+        <input name="d" type="radio" value="Future" id="ftr" checked> <span id="ftr">Future</span>
+        <input name="d" type="radio" value="Present" id="prs"> <span id="prs">Present</span>        
+        <input name="d" type="radio" value="Past" id="pst"> <span id="pst">Past</span>
+    </div><br>
+
+
+    <button type="submit" id="enterscore" style="border: none; background: none;">
+        <img src="arrow-add-R.png" alt=""> 
+    </button><br><br>
+
+    <h2>Chart List (Best 30)</h2>
+
+    <table>
+        <thead>
+            <tr> 
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Difficulty</th>
+                <th>Constant</th>
+                <th>Score</th>
+                <th>Status</th>
+                <th>Potential</th>
+            </tr>
+        </thead>
+        
+        <tbody id="list">
+            <tr>
+                <td>0</td>
+                <td>Testify</td>
+                <td>Beyond</td>
+                <td>12.0</td>
+                <td>10002221</td>
+                <td>Pure Memory</td>
+                <td>14.0</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <script src="content.js"></script>
+</body>
+</html>
