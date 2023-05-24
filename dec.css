@@ -18,3 +18,15 @@ table, td, th{
 #ftr{color: purple;}
 #prs{color: green;}
 #pst{color: cyan;}
+
+.deletechart{
+    max-width: 75%;
+    max-height: 45%; 
+    /* border: 0.1px solid black; */
+}
+
+/**********************
+pure letter for tags
+# for id
+. for class 
+***********************/

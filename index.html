@@ -19,9 +19,14 @@
     <label for="ChartConst">Chart Constant: </label>
     <input type="text" id="ChartConst"><br><br>
 
-    <label for="Score">Score: </label>
-    <input type="text" id="Score">
-    <br><br>
+    <div>
+        <label for="Score">Score: </label>
+        <input type="text" id="Score">
+        <input name="g" type="radio" value="EX+" id="EX+"> EX+
+        <input name="g" type="radio" value="EX" id="EX"> EX
+        <input name="g" type="radio" value="AAorBelow" id="AAorBelow"> AA-D
+    </div>
+    <br>
 
     <div>
         <label for="Status">Status: </label>
@@ -42,8 +47,12 @@
 
 
     <button type="submit" id="enterscore" style="border: none; background: none;">
-        <img src="arrow-add-R.png" alt=""> 
-    </button><br><br>
+        <img src="./img/Arrow R_square.png"> 
+    </button>
+    <button type="submit" id="deletescore" style="border: none; background: none;">
+        <img src="./img/Arrow L_square_disabled.png"> 
+    </button>
+    <br><br>
 
     <h2>Chart List (Best 30)</h2>
 
@@ -69,11 +78,17 @@
                 <td>10002221</td>
                 <td>Pure Memory</td>
                 <td>14.0</td>
+                <td>
+                    <button type="submit" style="border: none; background: none;" id="delete">
+                        <img src="./img/delet_button.png" class="deletechart">
+                    </button>
+                </td>
             </tr>
         </tbody>
-
+      
     </table>
 
+    <script src="buttons.js"></script>
     <script src="content.js"></script>
 </body>
 </html>
