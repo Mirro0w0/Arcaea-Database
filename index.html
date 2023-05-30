@@ -10,7 +10,6 @@
 
 <body>
 
-    
     <h1>Arcaea Database</h1>
     <h2>Score Input</h2>
     <label for="ChartName">Chart Name: </label>
@@ -19,6 +18,7 @@
     <label for="ChartConst">Chart Constant: </label>
     <input type="text" id="ChartConst"><br><br>
 
+    <!-- Score -->
     <div>
         <label for="Score">Score: </label>
         <input type="text" id="Score">
@@ -28,6 +28,7 @@
     </div>
     <br>
 
+    <!-- Status -->
     <div>
         <label for="Status">Status: </label>
         <input name="s" type="radio" value="Pure Memory" id="PM"> Pure Memory
@@ -37,6 +38,7 @@
         
     </div><br>
 
+    <!-- Difficulty -->
     <div>
         <label for="Difficulty">Difficulty: </label>       
         <input name="d" type="radio" value="Beyond" id="byd"> <span id="byd">Beyond</span> 
@@ -52,7 +54,47 @@
     <button type="submit" id="deletescore" style="border: none; background: none;">
         <img src="./img/Arrow L_square_disabled.png"> 
     </button>
-    <br><br>
+    <br>
+    
+    <div>
+        <label for="Autofill">Auto-fill/ find: </label>
+        <input type="text" id="fillchart">
+        <button type="submit" id="SearchChart">Search</button>
+        <button type="button" id="asksearch">?</button>
+        <script>
+            document.getElementById('asksearch').onclick = function()
+            {
+                let message = 
+                'You can enter the first few letters of the charts that you have entered before\n\n' + 
+                'If there are multiple options, a window will pop up for you to copy any of them\n\n' + 
+                'Else, it will auto-fill all the elements for you to edit your charts\n\n' + 
+                'Because difficulty DOES matter, please select the difficulty beforehand!!\n\n' +
+                'e.g. If you want to edit the score of Pentiment (FTR), please press "Future" from -Difficulty- section'
+                alert(message);
+            }
+        </script>
+    </div>
+    <br>
+
+
+    <div>
+        <label for="ranker">Rank: </label>
+        <input type="text" id="ranker">
+        <button type="button" id="askrank">?</button>
+        <script>
+            document.getElementById('askrank').onclick = function()
+            {
+                let message = 
+                'This value shows the rank of your selected chart from Auto-fill/ find (AFF)\n\n' + 
+                'If you do not want to edit the chart using AFF or you already know the rank of your chart, you can fill it manually\n\n' + 
+                '(However, I strongly recommend you using AFF)\n\n' + 
+                '             !! DO NOT edit it under other circumstances !!\n\n                          (YOU HAVE BEEN WARNDED)\n\n'
+                alert(message);
+            }
+        </script>
+    </div>
+    <br>
+
 
     <h2>Chart List (Best 30)</h2>
 
@@ -70,7 +112,8 @@
         </thead>
         
         <tbody id="list">
-            <tr>
+            <tr> 
+                <!-- onclick="ahh(this, no)" put this in tr-->
                 <td>0</td>
                 <td>Testify</td>
                 <td>Beyond</td>
@@ -78,11 +121,14 @@
                 <td>10002221</td>
                 <td>Pure Memory</td>
                 <td>14.0</td>
-                <td>
+                <!-- <script>
+                    let no = 0;
+                </script> -->
+                <!-- <td>
                     <button type="submit" style="border: none; background: none;" id="delete">
                         <img src="./img/delet_button.png" class="deletechart">
                     </button>
-                </td>
+                </td> -->
             </tr>
         </tbody>
       
@@ -90,5 +136,11 @@
 
     <script src="buttons.js"></script>
     <script src="content.js"></script>
+    <!-- <script>
+        function ahh(x, y){
+            //prompt(no + " Name:");
+            console.log("Row index is: " + x.rowIndex + " " + y);
+        }
+    </script> -->
 </body>
 </html>

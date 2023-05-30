@@ -25,6 +25,11 @@ table, td, th{
     /* border: 0.1px solid black; */
 }
 
+#ranker{
+    width: 5%;
+    border: 1px solid black;
+}
+
 /**********************
 pure letter for tags
 # for id
