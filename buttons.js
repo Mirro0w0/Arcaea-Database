@@ -1,4 +1,5 @@
 let pmset = false;
+let on = true;
 
 //Sets score to PM if PM radio is true
 document.getElementById('PM').onclick = function()
@@ -56,15 +57,17 @@ document.getElementById('EX+').onclick = function(){
 }
 
 document.getElementById('EX').onclick = function(){
-    if(!pmset)
-    {let dscore = document.getElementById('Score');
-    dscore.value = 9800000;}
+    let dscore = document.getElementById('Score');
+    let pmval = document.getElementById('PM');
+    pmval.checked = false;
+    dscore.value = 9800000;
 }
 
 document.getElementById('AAorBelow').onclick = function(){
-    if(!pmset)
-    {let dscore = document.getElementById('Score');
-    dscore.value = 9700000;}
+    let dscore = document.getElementById('Score');
+    let pmval = document.getElementById('PM');
+    pmval.checked = false;
+    dscore.value = 9700000;
 }
 
 //Allows user to get the chart name faster for editing existing charts
@@ -72,14 +75,13 @@ document.getElementById('SearchChart').onclick = function(){
     let element = document.getElementById('fillchart');
     let name = element.value;
     let list = []; 
-    let chartrank = 0; //return the idx of that element in all[i] for edit
 
     for (let i = 0; i < all.length; i++) //To obtain similar chart name
     {
         if (all[i].chartn.substring(0,name.length) == String(name)) 
         {
-            list.push(all[i]);
-            chartrank = i + 1;
+            list.push({rank: i+1, info: all[i]}); 
+            //rank = current chart rank
         }
     }
 
@@ -90,10 +92,10 @@ document.getElementById('SearchChart').onclick = function(){
         let dscore = document.getElementById('Score');
         let drank = document.getElementById('ranker');
 
-        dchart.value = list[0].chartn;
-        dchartconst.value = list[0].chartconst;
-        dscore.value = list[0].score;
-        drank.value = chartrank;
+        dchart.value = list[0].info.chartn;
+        dchartconst.value = list[0].info.chartconst;
+        dscore.value = list[0].info.score;
+        drank.value = list[0].rank;
     }
     else if(list.length == 0) alert("No result");
     else //Multiple output
@@ -101,8 +103,36 @@ document.getElementById('SearchChart').onclick = function(){
         let popup = ``;
         for (let i = 0; i < list.length; i++) 
         {
-            popup += list[i] + `\n`;
+            popup += `Rank ${list[i].rank}:` + list[i].info.chartn + `\n`;
         }
-        alert(popup);
+        let r = prompt(popup + "\nInsert the rank of your chart:");
+        if(r != '')
+        {
+            let dchart = document.getElementById('ChartName');
+            let dchartconst = document.getElementById('ChartConst');
+            let dscore = document.getElementById('Score');
+            let drank = document.getElementById('ranker');
+
+            dchart.value = list[r - 1].info.chartn;
+            dchartconst.value = list[r - 1].info.chartconst;
+            dscore.value = list[r - 1].info.score;
+            drank.value = list[r - 1].rank;
+        }
+    }
+}
+
+//Transition animation
+function showhide(v){
+    if(v || !on) 
+    {
+        document.getElementById("showbutton").src = "./img/btn-hide.png";
+        document.getElementById("ctable").style.marginRight = "0px";
+        on = true;
+    }
+    else
+    {
+        document.getElementById("showbutton").src = "./img/btn-show.png";
+        document.getElementById("ctable").style.marginRight = "-500px";
+        on = false;
     }
 }

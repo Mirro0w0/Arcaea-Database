@@ -96,9 +96,13 @@
     <br>
 
 
-    <h2>Chart List (Best 30)</h2>
+    <button type="submit" class="charttable" id="showhide" style="border: none; background: none;"
+    onclick="showhide()">
+        <img src="./img/btn-hide.png" style="border-radius: 4px;" id="showbutton"> 
+    </button>
+    <h2 class="charttable">Chart List (Best 30)</h2>
 
-    <table>
+    <table class="charttable" id="ctable">
         <thead>
             <tr> 
                 <th>Rank</th>
@@ -106,20 +110,18 @@
                 <th>Difficulty</th>
                 <th>Constant</th>
                 <th>Score</th>
-                <th>Status</th>
                 <th>Potential</th>
             </tr>
         </thead>
         
         <tbody id="list">
-            <tr> 
+            <tr class="selected"> 
                 <!-- onclick="ahh(this, no)" put this in tr-->
                 <td>0</td>
                 <td>Testify</td>
                 <td>Beyond</td>
                 <td>12.0</td>
-                <td>10002221</td>
-                <td>Pure Memory</td>
+                <td><span class="pmfont">10002221</span></td>
                 <td>14.0</td>
                 <!-- <script>
                     let no = 0;

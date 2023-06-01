@@ -17,30 +17,44 @@ function scoreCalculation(constant, score, pm)
 //Table Formation
 const table = function tableFormation()
 {
+    let target = all[all.length-1];
+
     all.sort(function(a,b){
         if(Number(a.ptt) > Number(b.ptt)) return -1;
         if(Number(a.ptt) < Number(b.ptt)) return 1;
         else return 0;
     }); //-1 if flip
 
-    console.log("all.length = " + all[all.length-1]);
+    //console.log("all.length = " + all[all.length-1]);
     let list = document.getElementById('list');
 
     list.innerHTML = ``;
 
     all.forEach(function(c,idx){
+        let sp = `<span`; //color span
+        switch(c.status){
+            case 'Pure Memory': sp += ` class="pmfont">`; break;
+            case 'Full Recall': sp += ` style="color: purple;">`; break;
+            case 'Track Lost': sp += ` style="color: red;>`; break;
+            default: sp = ''; break;
+        }
+
+        let selected = ``;
+        if(c === target) selected = `class="selected"`;
+
+
         list.innerHTML += `
-        <tr>
+        <tr ${selected}>
             <td><span id="byd">${idx+1}</span></td>
             <td>${c.chartn}</td>
             <td>${c.diff}</td>
             <td>${c.chartconst}</td>
-            <td>${c.score}</td>
-            <td>${c.status}</td>
+            <td>${sp}${c.score}</td>
             <td>${c.ptt}</td>
         </tr>`;
         
     })
+    showhide(1);
 
     console.log(all);
 }

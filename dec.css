@@ -3,6 +3,10 @@
     src: url(Exo-Light.ttf);
 }
 
+button{
+    cursor: pointer;
+}
+
 h1, h2, label, table, div{
     font-family: 'Arcaea', sans-serif;
 }
@@ -26,8 +30,55 @@ table, td, th{
 }
 
 #ranker{
-    width: 5%;
+    max-width: 30px;
     border: 1px solid black;
+}
+
+.charttable{
+    right: 10;
+    position: fixed;
+    top: 0;
+}
+
+.charttable#ctable{
+    top: 140px;
+    transition: 0.5s;
+}
+
+.charttable#showhide{
+    right: 5;
+    top: 40px;
+}
+
+.pmfont{
+    background: linear-gradient(purple, cyan);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+tr{
+    transition: all 0.15s ease-in;
+}
+
+tr:hover{
+    transform: scale(1.02);
+}
+
+.selected{
+    animation: zoom-in-zoom-out 1s ease infinite;
+}
+
+@keyframes zoom-in-zoom-out {
+    0% {
+      transform: scale(1, 1);
+    }
+    75% {
+      transform: scale(1.02, 1.02);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
 }
 
 /**********************
