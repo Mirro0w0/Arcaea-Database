@@ -1,5 +1,6 @@
 let pmset = false;
 let on = true;
+let lastselected = null;
 
 //Sets score to PM if PM radio is true
 document.getElementById('PM').onclick = function()
@@ -59,7 +60,10 @@ document.getElementById('EX+').onclick = function(){
 document.getElementById('EX').onclick = function(){
     let dscore = document.getElementById('Score');
     let pmval = document.getElementById('PM');
+    let tcval = document.getElementById('TC');
+    tcval.checked = true;
     pmval.checked = false;
+    pmset = false;
     dscore.value = 9800000;
 }
 
@@ -67,6 +71,7 @@ document.getElementById('AAorBelow').onclick = function(){
     let dscore = document.getElementById('Score');
     let pmval = document.getElementById('PM');
     pmval.checked = false;
+    pmset = false;
     dscore.value = 9700000;
 }
 
@@ -126,13 +131,37 @@ function showhide(v){
     if(v || !on) 
     {
         document.getElementById("showbutton").src = "./img/btn-hide.png";
-        document.getElementById("ctable").style.marginRight = "0px";
+        document.getElementById("mySidenav").style.width = "676px";
         on = true;
     }
     else
     {
         document.getElementById("showbutton").src = "./img/btn-show.png";
-        document.getElementById("ctable").style.marginRight = "-500px";
+        document.getElementById("mySidenav").style.width = "0px";
         on = false;
     }
+}
+
+function chartselected(rownum){
+    let idx = rownum.rowIndex-1;
+    if(lastselected === null)
+    {
+        rownum.classList.toggle("selected");
+        lastselected = rownum;
+    }
+    else{
+        lastselected.classList.remove("selected");
+        rownum.classList.toggle("selected");
+        lastselected = rownum;
+    }
+
+    let dchart = document.getElementById('ChartName');
+    let dchartconst = document.getElementById('ChartConst');
+    let dscore = document.getElementById('Score');
+    let drank = document.getElementById('ranker');
+
+    dchart.value = all[idx].chartn;
+    dchartconst.value = all[idx].chartconst;
+    dscore.value = all[idx].score;
+    drank.value = idx+1;
 }

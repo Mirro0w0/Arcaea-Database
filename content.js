@@ -40,11 +40,11 @@ const table = function tableFormation()
         }
 
         let selected = ``;
-        if(c === target) selected = `class="selected"`;
+        //if(c === target) selected = `class="selected"`;
 
 
         list.innerHTML += `
-        <tr ${selected}>
+        <tr ${selected} onclick="chartselected(this)">
             <td><span id="byd">${idx+1}</span></td>
             <td>${c.chartn}</td>
             <td>${c.diff}</td>
@@ -57,6 +57,7 @@ const table = function tableFormation()
     showhide(1);
 
     console.log(all);
+    document.getElementById("chartcnt").innerHTML = `Chart List (Total: ${all.length})`;
 }
 
 
@@ -64,9 +65,9 @@ const table = function tableFormation()
 document.getElementById('ChartConst').onblur = function(){
     let dchartconst = document.getElementById('ChartConst');
     if(dchartconst.value === '') return;
-    if(dchartconst.value > 12.0 || dchartconst.value <= 0) 
+    if(dchartconst.value > 12.0 || dchartconst.value <= 0 || isNaN(dchartconst.value - 0)) 
     {
-        alert("Invalid Chart Constant! (Range: 1 - 12)");
+        alert("Invalid Chart Constant! (Range: 1 - 12 || Integer)");
         dchartconst.value = '';
     }
 }
@@ -97,6 +98,11 @@ document.getElementById('enterscore').onclick = function(){
         }
         dstatus = pm.value;
     }
+    else 
+    {
+        alert("Missing Information");
+        return;
+    }
 
     let pst = document.getElementById('pst'); //Difficulty
     let prs = document.getElementById('prs');
@@ -114,7 +120,7 @@ document.getElementById('enterscore').onclick = function(){
     console.log(potential);
 
     if(dchart.value === "" || dscore.value === "" 
-    || dchartconst === "") 
+    || dchartconst === "" || ddiff === "") 
     {
         alert("Missing Information");
         return;
@@ -123,8 +129,8 @@ document.getElementById('enterscore').onclick = function(){
     all.push({chartn: dchart.value, chartconst: dchartconst.value,
         score: dscore.value, status: dstatus, ptt: potential, diff: ddiff});
 
-    dchart.value = '';
-    dchartconst.value = '';
+    // dchart.value = '';
+    // dchartconst.value = '';
 
     table();
 }

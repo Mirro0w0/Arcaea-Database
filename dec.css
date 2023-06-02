@@ -11,42 +11,32 @@ h1, h2, label, table, div{
     font-family: 'Arcaea', sans-serif;
 }
 
-
-table, td, th{
-    border: 1px solid black;
-    padding: 5px;
-    text-align: center;
-}
-
 #byd{color: red;}
 #ftr{color: purple;}
 #prs{color: green;}
 #pst{color: cyan;}
-
-.deletechart{
-    max-width: 75%;
-    max-height: 45%; 
-    /* border: 0.1px solid black; */
-}
 
 #ranker{
     max-width: 30px;
     border: 1px solid black;
 }
 
-.charttable{
+/* .charttable{
     right: 10;
     position: fixed;
     top: 0;
-}
+} */
 
-.charttable#ctable{
-    top: 140px;
-    transition: 0.5s;
+.charttable#lockview
+{
+    position: fixed;
+    right: 170px;
+    top: 40px;
 }
 
 .charttable#showhide{
-    right: 5;
+    position: fixed;
+    right: -2;
     top: 40px;
 }
 
@@ -63,6 +53,7 @@ tr{
 
 tr:hover{
     transform: scale(1.02);
+    background-color: rgb(184, 179, 179);
 }
 
 .selected{
@@ -74,6 +65,7 @@ tr:hover{
       transform: scale(1, 1);
     }
     75% {
+        background-color: rgb(186, 243, 243);
       transform: scale(1.02, 1.02);
     }
     100% {
@@ -81,6 +73,102 @@ tr:hover{
     }
 }
 
+table, td, th{
+    border: 1px solid black;
+    padding: 4px;
+    text-align: center;
+    /* max-width: 50px;*/
+    overflow: auto; 
+    border-radius: 3px;
+    width: 80px;
+    /* 80 */
+    max-width: 200px;
+}
+
+th{
+    background-color: rgb(179, 179, 179);
+    position: sticky;
+    top: 0;
+    opacity: 1;
+}
+
+table{
+    /* use fixed to manually set cell length*/
+    table-layout: fixed;
+}
+.thtitle{
+    width: 150px;
+    max-width: 150px;
+}
+.thlevel, .thrank{
+    width: 37px;
+}
+.thdiff, .thscore{
+    width: 56px;
+}
+
+.wrapper{
+    /* max-height: 100px; */
+    max-width: 676px;
+    /* overflow: scroll; */
+}
+
+table{
+    width: 700px;    
+    border: 1px solid #000;
+}
+
+
+.sidenav {
+    height: 78%;
+    width: 676px;
+    position: fixed;
+    z-index: 1;
+    top: 125;
+    /* 125 */
+    right: 0;
+    background-color: white;
+    overflow-y: scroll;
+    transition: 0.5s;
+    /* padding-top: 60px; */
+    opacity: 0.9;
+  }
+
+.bgimg{
+    /* background: linear-gradient(white, black); */
+    /* rgb(229, 226, 226) */
+    /* background-repeat: no-repeat; */
+    /* background-attachment: fixed; */
+    /* background-position: top; */
+    background-image: url('./img/diamond_shiawase.png');
+    background-size: 32%;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    left: 33%;
+    top: 0;
+    right: 0;
+    position: fixed;
+    animation: flash 5s infinite;
+}
+
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    25% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 /**********************
 pure letter for tags
 # for id

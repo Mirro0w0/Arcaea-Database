@@ -9,13 +9,13 @@
 </head>
 
 <body>
-
+    <div class="bgimg"> </div>
     <h1>Arcaea Database</h1>
     <h2>Score Input</h2>
-    <label for="ChartName">Chart Name: </label>
+    <label for="ChartName">Chart Title: </label>
     <input type="text" id="ChartName"><br><br>
 
-    <label for="ChartConst">Chart Constant: </label>
+    <label for="ChartConst">Chart Constant/ Level: </label>
     <input type="text" id="ChartConst"><br><br>
 
     <!-- Score -->
@@ -100,41 +100,49 @@
     onclick="showhide()">
         <img src="./img/btn-hide.png" style="border-radius: 4px;" id="showbutton"> 
     </button>
-    <h2 class="charttable">Chart List (Best 30)</h2>
+    <h2 id="chartcnt" style="right: 0; top: 0;position: fixed;">Chart List (Total: 0)</h2>
 
-    <table class="charttable" id="ctable">
-        <thead>
-            <tr> 
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Difficulty</th>
-                <th>Constant</th>
-                <th>Score</th>
-                <th>Potential</th>
-            </tr>
-        </thead>
-        
-        <tbody id="list">
-            <tr class="selected"> 
-                <!-- onclick="ahh(this, no)" put this in tr-->
-                <td>0</td>
-                <td>Testify</td>
-                <td>Beyond</td>
-                <td>12.0</td>
-                <td><span class="pmfont">10002221</span></td>
-                <td>14.0</td>
-                <!-- <script>
-                    let no = 0;
-                </script> -->
-                <!-- <td>
-                    <button type="submit" style="border: none; background: none;" id="delete">
-                        <img src="./img/delet_button.png" class="deletechart">
-                    </button>
-                </td> -->
-            </tr>
-        </tbody>
-      
-    </table>
+    <!-- <button type="submit" class="charttable" id="lockview" style="right: 120; top: 60; border: none; background: none;">
+        <img src="./img/finale-cell-lock-2.png" style="border-radius: 4px; max-width: 50px;" id="lockbutton"> 
+    </button> -->
+
+
+    <div id="mySidenav" class="sidenav">
+        <div class="wrapper">
+            <table class="charttable" id="ctable">
+                <thead>
+                    <tr> 
+                        <th class="thrank">Rank</th>
+                        <th class="thtitle">Title</th>
+                        <th class="thdiff">Difficulty</th>
+                        <th class="thlevel">Level</th>
+                        <th class="thscore">Score</th>
+                        <th class="thptt">Ptt.</th>
+                    </tr>
+                </thead>
+                
+                <tbody id="list">
+                    <tr onclick="chartselected(this)"> 
+                        <!-- onclick="ahh(this, no)" put this in tr-->
+                        <td>0</td>
+                        <td>Testify</td>
+                        <td>Beyond</td>
+                        <td>12.0</td>
+                        <td><span class="pmfont">10002221</span></td>
+                        <td>14.0</td>
+                        <!-- <script>
+                            let no = 0;
+                        </script> -->
+                        <!-- <td>
+                            <button type="submit" style="border: none; background: none;" id="delete">
+                                <img src="./img/delet_button.png" class="deletechart">
+                            </button>
+                        </td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <script src="buttons.js"></script>
     <script src="content.js"></script>
