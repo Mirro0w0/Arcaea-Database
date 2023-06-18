@@ -62,14 +62,14 @@ tr:hover{
 
 @keyframes zoom-in-zoom-out {
     0% {
-      transform: scale(1, 1);
+        transform: scale(1, 1);
     }
     75% {
         background-color: rgb(186, 243, 243);
-      transform: scale(1.02, 1.02);
+        transform: scale(1.02, 1.02);
     }
     100% {
-      transform: scale(1, 1);
+        transform: scale(1, 1);
     }
 }
 
@@ -132,7 +132,7 @@ table{
     transition: 0.5s;
     /* padding-top: 60px; */
     opacity: 0.9;
-  }
+}
 
 .bgimg{
     /* background: linear-gradient(white, black); */
@@ -169,6 +169,68 @@ table{
         opacity: 1;
     }
 }
+
+.inserted{
+    animation-name: flash-rapid;
+    animation-duration: 1.5s;
+    animation-timing-function: ease;
+}
+
+@keyframes flash-rapid{
+    0%{
+        background-color: white;
+        transform: scale(1.05, 1.05);
+    }
+    50%{
+        background-color: plum;
+        transform: scale(1.03, 1.03);
+    }
+
+    100%{
+        background-color: white;
+        transform: scale(1, 1);
+    }
+}
+
+/* tooltip */
+
+/*
+    .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: grey;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+
+  /* Position the tooltip *
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  animation-name: ani;
+  animation-duration: 1s;
+}
+
+@keyframes ani{
+  0%{opacity: 0;}
+  100%{opacity: 1;}
+}
+
+*/
+
+
 /**********************
 pure letter for tags
 # for id

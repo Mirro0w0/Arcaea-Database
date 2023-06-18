@@ -1,6 +1,6 @@
 let pmset = false;
-let on = true;
-let lastselected = null;
+let on = true; //show table = on
+let lastselected = null; //blinking indication
 
 //Sets score to PM if PM radio is true
 document.getElementById('PM').onclick = function()
@@ -81,9 +81,20 @@ document.getElementById('SearchChart').onclick = function(){
     let name = element.value;
     let list = []; 
 
+    let ddiff;
+    let pst = document.getElementById('pst'); //Difficulty
+    let prs = document.getElementById('prs');
+    let ftr = document.getElementById('ftr');
+    let byd = document.getElementById('byd');
+
+    if(pst.checked == true) ddiff = pst.value;
+    else if(prs.checked == true) ddiff = prs.value;
+    else if(ftr.checked == true) ddiff = ftr.value;
+    else if(byd.checked == true) ddiff = byd.value;
+
     for (let i = 0; i < all.length; i++) //To obtain similar chart name
     {
-        if (all[i].chartn.substring(0,name.length) == String(name)) 
+        if (all[i].chartn.substring(0,name.length) == String(name) && ddiff === all[i].diff) 
         {
             list.push({rank: i+1, info: all[i]}); 
             //rank = current chart rank
@@ -108,9 +119,9 @@ document.getElementById('SearchChart').onclick = function(){
         let popup = ``;
         for (let i = 0; i < list.length; i++) 
         {
-            popup += `Rank ${list[i].rank}:` + list[i].info.chartn + `\n`;
+            popup += `Rank ${list[i].rank}: ` + list[i].info.chartn + `\n`;
         }
-        let r = prompt(popup + "\nInsert the rank of your chart:");
+        let r = prompt(popup + "\nInsert the rank of your chart: ");
         if(r != '')
         {
             let dchart = document.getElementById('ChartName');
@@ -128,7 +139,19 @@ document.getElementById('SearchChart').onclick = function(){
 
 //Transition animation
 function showhide(v){
-    if(v || !on) 
+    if(v && !on)
+    {
+        document.getElementById("showbutton").src = "./img/btn-hide.png";
+        document.getElementById("mySidenav").style.width = "676px";
+
+        let appear = setTimeout(() => {
+            document.getElementById("showbutton").src = "./img/btn-show.png";
+            document.getElementById("mySidenav").style.width = "0px";
+        }, 4000);
+
+        appear;
+    }
+    else if(v || !on) 
     {
         document.getElementById("showbutton").src = "./img/btn-hide.png";
         document.getElementById("mySidenav").style.width = "676px";
@@ -142,8 +165,12 @@ function showhide(v){
     }
 }
 
+//Editing charts by clicking on the table row
 function chartselected(rownum){
+    document.getElementById('deletescore').disabled = false;
+    //console.log("delete on: " + document.getElementById('deletescore').disabled);
     let idx = rownum.rowIndex-1;
+    if(all.length == 0) return; //empty chart list
     if(lastselected === null)
     {
         rownum.classList.toggle("selected");
@@ -151,6 +178,7 @@ function chartselected(rownum){
     }
     else{
         lastselected.classList.remove("selected");
+        rownum.classList.remove("inserted");
         rownum.classList.toggle("selected");
         lastselected = rownum;
     }
@@ -164,4 +192,24 @@ function chartselected(rownum){
     dchartconst.value = all[idx].chartconst;
     dscore.value = all[idx].score;
     drank.value = idx+1;
+
+    let ddiff = all[idx].diff;
+    switch(ddiff){
+        case "Beyond": 
+            let byd = document.getElementById('byd');
+            byd.checked = true;
+            break;
+        case "Future":
+            let ftr = document.getElementById('ftr');
+            ftr.checked = true;
+            break;
+        case "Present":  
+            let prs = document.getElementById('prs');
+            prs.checked = true;
+            break;
+        case "Past":
+            let pst = document.getElementById('pst');
+            pst.checked = true;
+            break;
+    }
 }

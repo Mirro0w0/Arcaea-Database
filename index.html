@@ -49,10 +49,10 @@
 
 
     <button type="submit" id="enterscore" style="border: none; background: none;">
-        <img src="./img/Arrow R_square.png"> 
+        <img src="./img/Arrow R_square.png">
     </button>
-    <button type="submit" id="deletescore" style="border: none; background: none;">
-        <img src="./img/Arrow L_square_disabled.png"> 
+    <button type="submit" id="deletescore" style="border: none; background: none;" disabled>
+        <img src="./img/Arrow L_square_disabled.png" id="delimg"> 
     </button>
     <br>
     
@@ -85,10 +85,9 @@
             document.getElementById('askrank').onclick = function()
             {
                 let message = 
-                'This value shows the rank of your selected chart from Auto-fill/ find (AFF)\n\n' + 
-                'If you do not want to edit the chart using AFF or you already know the rank of your chart, you can fill it manually\n\n' + 
-                '(However, I strongly recommend you using AFF)\n\n' + 
-                '             !! DO NOT edit it under other circumstances !!\n\n                          (YOU HAVE BEEN WARNDED)\n\n'
+                'This value shows the rank of your selected chart\n\n' + 
+                'A value will only show when you are editing any chart\n\n' + 
+                'Please DELETE any value within it if you are adding new chart'
                 alert(message);
             }
         </script>
@@ -147,10 +146,11 @@
     <script src="buttons.js"></script>
     <script src="content.js"></script>
     <!-- <script>
-        function ahh(x, y){
-            //prompt(no + " Name:");
-            console.log("Row index is: " + x.rowIndex + " " + y);
-        }
+        //delete button
+        let dis = document.getElementById('deletescore');
+        if(dis.disabled === false) document.getElementById('delimg').src = "./img/Arrow L_square.png";
+        else if(dis.disabled === true) document.getElementById('delimg').src = "./img/Arrow L_square_disabled.png";
+        console.log(document.getElementById('deletescore').disabled);
     </script> -->
 </body>
 </html>

@@ -1,5 +1,15 @@
 //all chart data
 var all = [];
+var set = new Set();
+
+    /*
+        chartn: dchart.value
+        chartconst: dchartconst.value,
+        score: dscore.value
+        status: dstatus
+        ptt: potential
+        diff: ddiff
+    */
 
 //Score Calulation
 function scoreCalculation(constant, score, pm)
@@ -14,16 +24,66 @@ function scoreCalculation(constant, score, pm)
     return potential;
 }
 
+function editInfo(rk, obj, hashvalue){
+    //the hashvalue here is the new data
+
+    /*
+        chartn: dchart.value
+        chartconst: dchartconst.value,
+        score: dscore.value
+        status: dstatus
+        ptt: potential
+        diff: ddiff
+    */
+
+    let change = '';
+    if(all[rk].chartn !== obj.chartn) change += `Title: ${all[rk].chartn} ——> ${obj.chartn}\n`;
+    if(all[rk].chartconst !== obj.chartconst) change += `Constant: ${all[rk].chartconst} ——> ${obj.chartconst}\n`;
+    if(all[rk].score !== obj.score) change += `Score: ${all[rk].score} ——> ${obj.score}\n`;
+    if(all[rk].status !== obj.status) change += `Status: ${all[rk].status} ——> ${obj.status}\n`;
+    if(all[rk].diff !== obj.diff) change += `Difficulty: ${all[rk].diff} ——> ${obj.diff}\n`;
+
+    let oldhashvalue = all[rk].chartn + all[rk].diff;
+        
+    if(change === ''){alert("No change"); return;}
+
+    let yesno = confirm(`Replacing chart at Rank ${rk+1}: ${all[rk].chartn}\n` + change);
+    if(yesno)
+    {
+        // all[rk] = obj;
+        if(hashvalue !== oldhashvalue) 
+        {
+            if(set.has(hashvalue)) {alert(`${obj.chartn} (${obj.diff}) already exists!`); return;}
+            else
+            {
+                set.add(hashvalue);
+                set.delete(oldhashvalue);
+            }
+        }
+        all[rk] = obj;
+        
+        table();
+        let clear = document.getElementById('ranker');
+        clear.value = '';
+        
+
+        //document.getElementById('delimg').src = "./img/Arrow L_square_disabled.png"
+    }
+}
+
 //Table Formation
 const table = function tableFormation()
 {
-    let target = all[all.length-1];
+    let allposition = document.getElementById('ranker').value == '' ? all.length-1 : document.getElementById('ranker').value-1;
+    //insert animation
+    let target = all[allposition];
 
     all.sort(function(a,b){
         if(Number(a.ptt) > Number(b.ptt)) return -1;
         if(Number(a.ptt) < Number(b.ptt)) return 1;
         else return 0;
     }); //-1 if flip
+    //insert the chart at the bottom, then sort the whole thing back
 
     //console.log("all.length = " + all[all.length-1]);
     let list = document.getElementById('list');
@@ -31,6 +91,7 @@ const table = function tableFormation()
     list.innerHTML = ``;
 
     all.forEach(function(c,idx){
+        //document.querySelector('tbody')
         let sp = `<span`; //color span
         switch(c.status){
             case 'Pure Memory': sp += ` class="pmfont">`; break;
@@ -39,12 +100,13 @@ const table = function tableFormation()
             default: sp = ''; break;
         }
 
-        let selected = ``;
-        //if(c === target) selected = `class="selected"`;
+        let inserted = ``;
+        if(c === target) inserted = `class="inserted"`;
+        //insert animation
 
 
         list.innerHTML += `
-        <tr ${selected} onclick="chartselected(this)">
+        <tr ${inserted} onclick="chartselected(this)">
             <td><span id="byd">${idx+1}</span></td>
             <td>${c.chartn}</td>
             <td>${c.diff}</td>
@@ -55,8 +117,10 @@ const table = function tableFormation()
         
     })
     showhide(1);
+    //show the chart: extra argument (1) for hiding the list
 
     console.log(all);
+    console.log(set);
     document.getElementById("chartcnt").innerHTML = `Chart List (Total: ${all.length})`;
 }
 
@@ -69,6 +133,17 @@ document.getElementById('ChartConst').onblur = function(){
     {
         alert("Invalid Chart Constant! (Range: 1 - 12 || Integer)");
         dchartconst.value = '';
+    }
+}
+
+//Checks valid Score
+document.getElementById('Score').onblur = function(){
+    let dscore = document.getElementById('Score');
+    if(dscore.value === '') return;
+    if(dscore.value > 10002237 || dscore.value <= 0 || isNaN(dscore.value - 0)) 
+    {
+        alert("Invalid Score! (0 - 10,000,000+ || Integer)");
+        dscore.value = '';
     }
 }
 
@@ -117,13 +192,30 @@ document.getElementById('enterscore').onclick = function(){
     let potential = scoreCalculation(dchartconst.value, dscore.value, pm.checked);
 
 
-    console.log(potential);
+    //console.log(potential);
+
 
     if(dchart.value === "" || dscore.value === "" 
     || dchartconst === "" || ddiff === "") 
     {
         alert("Missing Information");
         return;
+    }
+
+    let hashvalue = dchart.value + ddiff;
+    let rank = document.getElementById('ranker').value;
+    if(rank !== '') 
+    {
+        let obj = {chartn: dchart.value, chartconst: dchartconst.value,
+            score: dscore.value, status: dstatus, ptt: potential, diff: ddiff};
+        editInfo(rank-1, obj, hashvalue); 
+        return;
+    }
+    else
+    {
+        if(set.has(hashvalue)) {alert(`${dchart.value} (${ddiff}) already exists!`); return;}
+        else set.add(hashvalue);
+        //check repeated charts
     }
 
     all.push({chartn: dchart.value, chartconst: dchartconst.value,
